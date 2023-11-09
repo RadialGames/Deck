@@ -11,11 +11,33 @@ namespace Radial.Deck
 
         public int LibraryAndDiscardSize => Library.Size + Discarded.Size;
 
-        public Deck(Set<T> library)
+        /// <summary>
+        /// Creates a Deck with no elements set in any of the Sets.
+        /// </summary>
+        public Deck() : this(Array.Empty<T>(), new Random()) { }
+        
+        /// <summary>
+        /// Creates a Deck with no elements set in any of the Sets, and with a shared Random provider
+        /// </summary>
+        /// <param name="random">A random provider to be used for shuffling</param>
+        public Deck(Random random) : this(Array.Empty<T>(), random) { }
+
+        /// <summary>
+        /// Creates a Deck with the provided elements being populated to the Library.
+        /// </summary>
+        /// <param name="library">The set to be populated to the Library</param>
+        public Deck(IEnumerable<T> library) : this(library, new Random()) { }
+
+        /// <summary>
+        /// Creates a Deck with the provided elements being populated to the Library.
+        /// </summary>
+        /// <param name="library">The set to be populated to the Library</param>
+        /// <param name="random">A random provider to be used for shuffling</param>
+        public Deck(IEnumerable<T> library, Random random)
         {
-            Library = library;
-            Discarded = new Set<T>();
-            Exiled = new Set<T>();
+            Library = new Set<T>(library, random);
+            Discarded = new Set<T>(random);
+            Exiled = new Set<T>(random);
         }
 
         /// <summary>
@@ -74,6 +96,16 @@ namespace Radial.Deck
             }
 
             return drawn;
+        }
+
+        /// <summary>
+        /// Replaces the existing Random provider with a new one, for use in shuffling.
+        /// </summary>
+        public void ReplaceRandomProvider(Random newProvider)
+        {
+            Library.ReplaceRandomProvider(newProvider);
+            Discarded.ReplaceRandomProvider(newProvider);
+            Exiled.ReplaceRandomProvider(newProvider);
         }
     }
 }

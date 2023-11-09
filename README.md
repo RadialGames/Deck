@@ -128,20 +128,12 @@ deck.ReturnExiledToBottomOfLibrary();
 deck.Library.Shuffle();
 ```
 
-### Shuffler
+## Randomization
 
-This is a static class that implements a simple Fischer-Yates randomization algorithm. It is used
-to hold a `System.Random` instance for (optional) deterministic results.
+The `Set` and `Deck` classes both accept a `Random` object in their constructors, which can be used to control the
+random seed used when `Set.Shuffle()` is called (thus making the shuffle, optionally, deterministic).
 
-By default, if you ignore this class, it will self-initialize and produce random results each time. Alternatively;
+If no `Random` object is provided, a new one is generated with non-deterministic results.
 
-```C#
-var seed = 12345; 
-Shuffler.SetRandomSeed(seed);
-
-deck.Library.Shuffle();
-deck.Draw(); // deterministic result
-```
-
-Shuffler also provides array and List extensions for shuffling, in addition to a `RandomFloatInRange(min, max)` function
-so that you may use this class elsewhere in your project with a shared random seed.
+You can call `Deck.ReplaceRandomProvider(new Random(mySeed))` to replace the random provider for all `Set`s in your
+`Deck` in a single operation.
