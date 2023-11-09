@@ -1,7 +1,27 @@
 ﻿Deck
 ===========
 
-This is the `UPM` repository for Deck, the generic C# deck/card/shuffling abstraction library. 
+## Concept
+
+This is the `UPM` repository for Deck, the generic C# deck/card/shuffling abstraction library.
+
+When designing games, I often think about random events and items in terms of "cards in a deck." This makes it easier to
+conceptualize odds, weights, repetition, and probabilities.
+
+This library is a generic implementation of that concept -- it doesn't presuppose cards, and instead uses generic types
+of your own choosing.
+
+Feel free to send feedback, submit pull requests, or open issues!
+
+## Requirements
+
+- This packages requires access to the `System` and `System.Collections.Generic` namespaces, which should be trivial for
+any standard project package.
+- Tested in Unity 2019.4.0f1, should work in anything newer.
+- This package utilizes C# language features introduced in C# 8.0, and thus requires a compiler that supports that, eg:
+.NET Core 3.x or .NET 5.0+
+- 
+## Installation
 
 Install it via the Unity Package Manager by:
 - Opening your project in Unity
@@ -12,22 +32,6 @@ Install it via the Unity Package Manager by:
 
 Or if you aren't using Unity, just grab the C# files and start using them as-is. Nothing in this package requires Unity;
 and there are no Unity-specific dependencies. You can use these files directly in any C# project.
-
-## Concept
-
-When designing games, I often think about random events and items in terms of "cards in a deck." This makes it easier to
-conceptualize odds, weights, repetition, and probabilities.
-
-This library is a generic implementation of that concept -- it doesn't presuppose cards, and instead uses generic types
-of your own choosing.
-
-## Requirements
-
-- This packages requires access to the `System` and `System.Collections.Generic` namespaces, which should be trivial for
-any standard project package.
-- Tested in Unity 2019.4.0f1, should work in anything newer.
-- This package utilizes C# language features introduced in C# 8.0, and thus requires a compiler that supports that, eg:
-.NET Core 3.x or .NET 5.0+
 
 ## Usage
 
