@@ -99,7 +99,7 @@ var set = new Set<int>();
 set.AddToTop(1);
 set.AddToTop(2);
 set.AddToTop(3);
-var itemsInHand = Set.Draw(2); // [3, 2]
+var itemsInHand = set.Draw(2); // [3, 2]
 ```
 
 It's important to note that a `Set` on its own does not track items that have been drawn - once you draw all the items
@@ -108,11 +108,11 @@ of a set, the Set will be empty, and you will have to re-populate it (and perhap
 ```c#
 var set = new Set<int>();
 set.AddToTop(1);
-var itemInHand = Set.Draw(); // 1
+var itemInHand = set.Draw(); // 1
 
 set.Size(); // 0; calling Draw() again at this point will cause an Exception.
 set.AddToBottom(itemInHand); // add the item back to the bottom of the Set
-itemInHand = Set.Draw(); // Draw a new item (still 1!)
+itemInHand = set.Draw(); // Draw a new item (still 1!)
 ```
 
 You can `AddToBottom()`, `AddToTop()`, or `AddAtIndex()`, so you have flexibility on where items can be inserted.
