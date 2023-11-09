@@ -65,7 +65,7 @@ constructs.
 ### Set
 
 The foundation of this package is a `Set<T>` of items. The items can be of any type. A `Set` could be thought of as
-a hand of cards, a draw pile, or a discard pile.
+any collection of cards -- a draw pile, a discard pile, a graveyard, whatever your project needs.
 
 Sets can be initialized with any `IEnumerable` such as a `Stack<T>` or a `Queue<T>` of items; the draw-order of items is
 important and preserved, with the first index (0) of an array or List being drawn first.
