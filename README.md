@@ -20,7 +20,7 @@ any standard project package.
 - Tested in Unity 2019.4.0f1, should work in anything newer.
 - This package utilizes C# language features introduced in C# 8.0, and thus requires a compiler that supports that, eg:
 .NET Core 3.x or .NET 5.0+
-- 
+
 ## Installation
 
 Install it via the Unity Package Manager by:
