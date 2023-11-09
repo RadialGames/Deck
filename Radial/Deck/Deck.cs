@@ -99,6 +99,22 @@ namespace Radial.Deck
         }
 
         /// <summary>
+        /// Places an item on the top of the Discarded set.
+        /// </summary>
+        public void Discard(T item)
+        {
+            Discarded.AddToTop(item);
+        }
+
+        /// <summary>
+        /// Places items on the top of the Discarded set. Sequencing of items is preserved.
+        /// </summary>
+        public void Discard(IEnumerable<T> items)
+        {
+            Discarded.AddToTop(items);
+        }
+
+        /// <summary>
         /// Replaces the existing Random provider with a new one, for use in shuffling.
         /// </summary>
         public void ReplaceRandomProvider(Random newProvider)

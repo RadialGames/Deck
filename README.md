@@ -50,7 +50,7 @@ deck.Library.AddToTop(3);
 
 int[] myHand = deck.Draw(2); // draws [3,2]
 
-deck.Discarded.AddToTop(myHand); // Discard your hand
+deck.Discard(myHand); // Discard your hand
 
 myHand = deck.Draw(2); // Auto shuffles the discarded items back into the library, and draws [1,3] (non-deterministic)
 ```
@@ -146,7 +146,7 @@ var item = deck.Draw(); // 1
 deck.Discarded.AddToTop(item); // place this item in the discard pile for future use
 
 var items = deck.Draw(3); // [2, 3, 1] - this is deterministic as there is only one item in the discard pile.
-deck.Discarded.AddToTop(items); // place all the items back into discard.
+deck.Discard(items); // place all the items back into discard.
 deck.Library.Size(); // 0
 deck.Discarded.Size(); // 3
 
