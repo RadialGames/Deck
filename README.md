@@ -1,14 +1,17 @@
 ﻿Deck
 ===========
 
-This is the Unity Package Manager repository for Deck, the generic C# deck/card/shuffling library. 
+This is the `UPM` repository for Deck, the generic C# deck/card/shuffling abstraction library. 
 
-Install it via `UPM`:
-```
-https://github.com/RadialGames/Deck.git
-```
+Install it via the Unity Package Manager by:
+- Opening your project in Unity
+- Open the Package Manager window (`Window > Package Manager`)
+- Click the `+` button in the top left corner of the window
+- Select `Add package from git URL...`
+- Enter the following url, and you'll be up to date: `https://github.com/RadialGames/Deck.git`
 
-Or if you aren't using Unity, just grab the C# files and start using them as-is.
+Or if you aren't using Unity, just grab the C# files and start using them as-is. Nothing in this package requires Unity;
+and there are no Unity-specific dependencies. You can use these files directly in any C# project.
 
 ## Concept
 
@@ -18,9 +21,42 @@ conceptualize odds, weights, repetition, and probabilities.
 This library is a generic implementation of that concept -- it doesn't presuppose cards, and instead uses generic types
 of your own choosing.
 
-Nothing in this package requires Unity; you can use these files directly in any C# project.
+## Requirements
+
+- This packages requires access to the `System` and `System.Collections.Generic` namespaces, which should be trivial for
+any standard project package.
+- Tested in Unity 2019.4.0f1, should work in anything newer.
+- This package utilizes C# language features introduced in C# 8.0, and thus requires a compiler that supports that, eg:
+.NET Core 3.x or .NET 5.0+
 
 ## Usage
+
+All files in this package are in the `Radial.Deck` namespace. Access them by adding the following to the top of your
+files:
+
+```c#
+using Radial.Deck;
+```
+
+### QuickStart
+
+You can quickly create a new `Deck` and start using it with the following code:
+
+```c#
+var deck = new Deck<int>(); // Create the initial deck, and populate it
+deck.Library.AddToTop(1);
+deck.Library.AddToTop(2);
+deck.Library.AddToTop(3);
+
+int[] myHand = deck.Draw(2); // draws [3,2]
+
+deck.Discarded.AddToTop(myHand); // Discard your hand
+
+myHand = deck.Draw(2); // Auto shuffles the discarded items back into the library, and draws [1,3] (non-deterministic)
+```
+
+Note that the type used when declaring the `Deck` is not locked to `int`, it can be of any basic type or your own
+constructs.
 
 ### Set
 
@@ -100,13 +136,10 @@ own game logic).
 The primary role of the `Deck` class is to help automate the common process of drawing from a `Library`, and shuffling
 `Discarded` items back into your Library when the Library is empty.
 
-`Deck`s are initialized with a `Set` of items as the initial state of the system.
+`Deck`s are initialized with a collection of items as the initial state of the system.
 
 ```c#
-var initialLibrary = new Set<int>();
-initialLibrary.AddToBottom(1);
-initialLibrary.AddToBottom(2);
-initialLibrary.AddToBottom(3);
+var initialLibrary = new int[] { 1, 2, 3 };
 
 var deck = new Deck<int>(initialLibrary);
 var item = deck.Draw(); // 1
