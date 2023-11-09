@@ -88,7 +88,7 @@ set.Draw(); // "bar"
 ```
 
 As demonstrated above, the `Draw()` function will remove an item from the top of the Set, and return it. You can also
-request a certain number of cards to be Drawn, which will return a List of items:
+request a certain number of cards to be Drawn, which will return an array of items:
 
 ```c#
 var set = new Set<int>();
@@ -111,7 +111,7 @@ set.AddToBottom(itemInHand); // add the item back to the bottom of the Set
 itemInHand = Set.Draw(); // Draw a new item (still 1!)
 ```
 
-You can `AddToBottom()` or `AddToTop()` of a Set, which will add the item to the bottom or top of the Set, respectively.
+You can `AddToBottom()`, `AddToTop()`, or `AddAtIndex()`, so you have flexibility on where items can be inserted.
 This will alter the order in which items will be drawn; items are always drawn from the top first.
 
 ```c#
