@@ -15,8 +15,8 @@ Or if you aren't using Unity, just grab the C# files and start using them as-is.
 When designing games, I often think about random events and items in terms of "cards in a deck." This makes it easier to
 conceptualize odds, weights, repetition, and probabilities.
 
-This library is a generic implementation of that concept -- it doesn't 
-presuppose cards, and instead uses generic types of your own choosing.
+This library is a generic implementation of that concept -- it doesn't presuppose cards, and instead uses generic types
+of your own choosing.
 
 Nothing in this package requires Unity; you can use these files directly in any C# project.
 
@@ -27,7 +27,8 @@ Nothing in this package requires Unity; you can use these files directly in any 
 The foundation of this package is a `Set<T>` of items. The items can be of any type. A `Set` could be thought of as
 a hand of cards, a draw pile, or a discard pile.
 
-Sets can be initialized with a `Stack<T>` or a `Queue<T>` of items; the draw-order of items is important and preserved.
+Sets can be initialized with any `IEnumerable` such as a `Stack<T>` or a `Queue<T>` of items; the draw-order of items is
+important and preserved, with the first index (0) of an array or List being drawn first.
 
 ```c#
 var items = new Stack<int>(); // LIFO
@@ -94,7 +95,7 @@ A Deck is a helper collection of Sets that can be shuffled and drawn from; it tr
 and Exiled Set. It can be thought of as all the cards in the box, minus anything that is "in play" (and managed by your
 own game logic).
 
-(coming soon: an InHand Set, that helps manage the state further).
+(TODO: an InHand Set, that helps manage that common state further).
 
 The primary role of the `Deck` class is to help automate the common process of drawing from a `Library`, and shuffling
 `Discarded` items back into your Library when the Library is empty.
@@ -141,3 +142,6 @@ Shuffler.SetRandomSeed(seed);
 deck.Library.Shuffle();
 deck.Draw(); // deterministic result
 ```
+
+Shuffler also provides array and List extensions for shuffling, in addition to a `RandomFloatInRange(min, max)` function
+so that you may use this class elsewhere in your project with a shared random seed.

@@ -23,21 +23,14 @@ namespace Radial.Deck
         }
         
         /// <summary>
-        /// Create a new Set
+        /// Create a new Set with elements initialized
         /// </summary>
-        /// <param name="items">A LIFO stack, ensuring draw order is preserved</param>
-        public Set(Stack<T> items)
+        /// <param name="items">Draw order is preserved, with the first index (0) being first drawn.</param>
+        public Set(IEnumerable<T> items)
         {
-            Items = new List<T>();
             AddToTop(items);
         }
-
-        public Set(Queue<T> items)
-        {
-            Items = new List<T>();
-            AddToTop(items);
-        }
-
+        
         public void RemoveAllOfType(T item)
         {
             while (Items.Contains(item))
@@ -59,32 +52,31 @@ namespace Radial.Deck
             Items.Add(item);
         }
 
-        public void AddToBottom(Stack<T> items)
+        /// <summary>
+        /// Adds multiple items to the bottom of the set. The top item of the provided items will be drawn first, once
+        /// the rest of the Items are exhausted.
+        /// </summary>
+        /// <param name="items">Items presented in the order they should be drawn (index 0 being drawn before the others).</param>
+        public void AddToBottom(IEnumerable<T> items)
         {
             Items.AddRange(items);
         }
 
         /// <summary>
-        /// Adds an item to the top of the set (will be drawn first)
+        /// Adds an item to the top of the set (to be drawn first)
         /// </summary>
         public void AddToTop(T item)
         {
             AddAtIndex(0, item);
         }
 
-        public void AddToTop(Stack<T> items)
+        /// <summary>
+        /// Adds items to the top of the set
+        /// </summary>
+        /// <param name="items">index 0 will be drawn first</param>
+        public void AddToTop(IEnumerable<T> items)
         {
-            // To preserve the sequence we need to invert the stack
-            var reversedItems = items.Reverse();
-            foreach (var item in reversedItems)
-            {
-                AddToTop(item);
-            }
-        }
-
-        public void AddToTop(Queue<T> items)
-        {
-            Items.AddRange(items);
+            Items.InsertRange(0, items);
         }
 
         public void AddAtIndex(int index, T item)
@@ -114,17 +106,17 @@ namespace Radial.Deck
         /// <param name="numToDraw">The number of items to draw</param>
         /// <output>A list of the drawn items, where index 0 is the first item drawn</output>
         /// <exception cref="ArgumentException">Will throw error if you ask for more cards than exist in the set</exception>
-        public List<T> Draw(int numToDraw)
+        public T[] Draw(int numToDraw)
         {
             if (numToDraw > Size)
             {
                 throw new ArgumentException($"Cannot draw more items than are in the set. Requested: {numToDraw}, Available: {Size}");
             }
 
-            var output = new List<T>();
+            var output = new T[numToDraw];
             for (int i = 0; i < numToDraw; i++)
             {
-                output.Add(Draw());
+                output[i] = Draw();
             }
 
             return output;
@@ -132,7 +124,7 @@ namespace Radial.Deck
         
         public void Shuffle()
         {
-            Items = Shuffler.Shuffle<T>(Items).ToList();
+            Items = Shuffler.Shuffle(Items).ToList();
         }
     }
 }
