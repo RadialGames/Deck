@@ -150,7 +150,7 @@ var itemInHand = deck.Draw(); // 1
 deck.Discard(item); // place this item in the discard pile for future use
 
 var itemsInHand = deck.Draw(3); // [2, 3, 1] - this is deterministic as there is only one item in the discard pile.
-deck.Discard(items); // place all the items back into discard.
+deck.Discard(itemsInHand); // place all the items back into discard.
 deck.Library.Size(); // 0
 deck.Discarded.Size(); // 3
 
