@@ -1,6 +1,6 @@
 ﻿{
   "name": "com.radialgames.deck",
-  "version": "0.6.9",
+  "version": "0.7.0",
   "displayName": "Decks",
   "description": "A generic deck library to assist with prototyping in Unity",
   "unity": "2019.4",
