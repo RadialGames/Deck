@@ -1,5 +1,5 @@
 ﻿{
-  "name": "Radial.Deck",
+  "name": "com.radialgames.deck",
   "version": "0.6.9",
   "displayName": "Decks",
   "description": "A generic deck library to assist with prototyping in Unity",
