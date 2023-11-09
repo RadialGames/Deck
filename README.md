@@ -27,7 +27,7 @@ Nothing in this package requires Unity; you can use these files directly in any 
 The foundation of this package is a `Set<T>` of items. The items can be of any type. A `Set` could be thought of as
 a hand of cards, a draw pile, or a discard pile.
 
-Sets are initialized with a `Stack<T>` of items, as the draw-order of items is important and preserved.
+Sets can be initialized with a `Stack<T>` or a `Queue<T>` of items; the draw-order of items is important and preserved.
 
 ```c#
 var items = new Stack<int>(); // LIFO
@@ -42,7 +42,7 @@ set.Draw(); // 2
 You can also initialize a `Set` with no items, and add them later.
 
 ```c#
-var set = new Set<string>(null);
+var set = new Set<string>();
 set.Size(); // 0
 set.AddToTop("foo");
 set.AddToTop("bar");
@@ -54,7 +54,7 @@ As demonstrated above, the `Draw()` function will remove an item from the top of
 request a certain number of cards to be Drawn, which will return a List of items:
 
 ```c#
-var set = new Set<int>(null);
+var set = new Set<int>();
 set.AddToTop(1);
 set.AddToTop(2);
 set.AddToTop(3);
@@ -65,7 +65,7 @@ It's important to note that a `Set` on its own does not track items that have be
 of a set, the Set will be empty, and you will have to re-populate it (and perhaps shuffle it).
 
 ```c#
-var set = new Set<int>(null);
+var set = new Set<int>();
 set.AddToTop(1);
 var itemInHand = Set.Draw(); // 1
 
@@ -78,7 +78,7 @@ You can `AddToBottom()` or `AddToTop()` of a Set, which will add the item to the
 This will alter the order in which items will be drawn; items are always drawn from the top first.
 
 ```c#
-var set = new Set<int>(null);
+var set = new Set<int>();
 set.AddToTop(1);
 set.AddToTop(2);
 set.AddToBottom(3);
@@ -102,7 +102,7 @@ The primary role of the `Deck` class is to help automate the common process of d
 `Deck`s are initialized with a `Set` of items as the initial state of the system.
 
 ```c#
-var initialLibrary = new Set<int>(null);
+var initialLibrary = new Set<int>();
 initialLibrary.AddToBottom(1);
 initialLibrary.AddToBottom(2);
 initialLibrary.AddToBottom(3);

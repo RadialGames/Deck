@@ -14,8 +14,8 @@ namespace Radial.Deck
         public Deck(Set<T> library)
         {
             Library = library;
-            Discarded = new Set<T>(null);
-            Exiled = new Set<T>(null);
+            Discarded = new Set<T>();
+            Exiled = new Set<T>();
         }
 
         /// <summary>

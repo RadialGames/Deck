@@ -15,18 +15,29 @@ namespace Radial.Deck
         public int Size => Items.Count;
         
         /// <summary>
+        /// Create a new Set that contains no elements.
+        /// </summary>
+        public Set()
+        {
+            Items = new List<T>();
+        }
+        
+        /// <summary>
         /// Create a new Set
         /// </summary>
-        /// <param name="items">LIFO stack to ensure draw order is preserved</param>
+        /// <param name="items">A LIFO stack, ensuring draw order is preserved</param>
         public Set(Stack<T> items)
         {
             Items = new List<T>();
-            if (items != null)
-            {
-                AddToTop(items);
-            }
+            AddToTop(items);
         }
-        
+
+        public Set(Queue<T> items)
+        {
+            Items = new List<T>();
+            AddToTop(items);
+        }
+
         public void RemoveAllOfType(T item)
         {
             while (Items.Contains(item))
@@ -69,6 +80,11 @@ namespace Radial.Deck
             {
                 AddToTop(item);
             }
+        }
+
+        public void AddToTop(Queue<T> items)
+        {
+            Items.AddRange(items);
         }
 
         public void AddAtIndex(int index, T item)
